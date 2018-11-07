@@ -1,0 +1,134 @@
+/* essa pimeira parte do css faz com que o conteúdo da página dependa da ativação do sidebar */
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 13%;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 13%;
+    width: 0;
+    height: 100%;
+    margin-left: -13%;
+    overflow-y: auto;
+    background-color: rgb(41, 61, 61);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 13%;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 5%;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -13%;
+}
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 13%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color:aliceblue;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: aliceblue;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: aliceblue;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 13%;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 13%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        position: absolute;
+        top: 18vh;
+        width: 87vw;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+
+   
+}
+    body{
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .lead{
+        color: aliceblue;
+        margin-top: 100%;
+    }
+    #menu-toggle{
+        background-color:rgb(34, 33, 33);
+        border: 0;
+        color: aliceblue;
+        display: inline-flex;
+        width: 3vw;
+        left: 0;
+    }
