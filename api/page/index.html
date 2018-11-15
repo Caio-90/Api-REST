@@ -18,7 +18,7 @@
 <body>
     <div id="wrapper">
 
-        <!-- Sidebar -->
+        <!-- exibe as categoias -->
         <div id="sidebar-wrapper">
             <div class="sidebar-nav">
                 <div class="container-fluid" id="pesquisa">
@@ -27,30 +27,68 @@
                     </div>
                     <script type="text/javascript">
                         var categoria = document.querySelector('#categoria')
-                        categoria.addEventListener('load', async function () {
-                            var req = await fetch('../categoria/slcategoria.php');
-                            var ncategoria = await req.json();
+                        async function menu() {
+                            var req = await fetch('../categoria/read.php');
+                            var nome = await req.json();
                             categoria.innerHTML = ""
-                            ncategoria.forEach(function (valor) {
-                                categoria.innerHTML += "<li><div id='titul' style='font-size: 30px'></div></li>" + valor.ncategoria;
-                            })
-                        })
-                       // categoria.addEventListener('click', function () {
+                            nome.forEach(function (valor) {
+                                console.log(valor.nome);
+                                categoria.innerHTML += "<li><div id=" + valor.id + " class='titul' onclick='restricao(" + valor.id + ")'>" + valor.nome + "</li>";
 
-                           // document.getElementById("valor.ncategoria").style.display = "block";
-                          //  document.getElementById("titul").style.display = "none";
-                      //  })
+
+                            })
+                        }
+                        menu();
                     </script>
 
                 </div>
             </div>
         </div>
-        <!-- Conteúdo da página -->
+        <!-- exibe os títulos -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                         <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">| | |</a>
+                        <div id="pos">
+                            <ul id="post"></ul>
+                        </div>
+                        <script type="text/javascript">
+
+                            var post = document.querySelector('#post')
+                            async function cont() {
+                                var req = await fetch('../post/read.php');
+                                var titulo = await req.json();
+                                post.innerHTML = ""
+                                titulo.forEach(function (valor) {
+                                    console.log(valor.titulo);
+                                    post.innerHTML += "<li><div id='cont' onclick='conteudo(" + valor.id + ")'>" + valor.titulo + "</div></li><div class="+valor.id+"></div>";
+                                })
+                            }
+                            cont();
+                        </script>
+                        <script>
+                            async function restricao(idcat) {
+                                var requi = await fetch('../post/read.php?idc=' + idcat);
+                                var titulo = await requi.json();
+                                post.innerHTML = ""
+                                titulo.forEach(function (valor) {
+                                    console.log(valor.titulo);
+                                    post.innerHTML += "<li><div id='cont' onclick='conteudo(" + valor.id + ")'>" + valor.titulo + "</div></li><div class="+valor.id+"></div>";
+                                })
+                            }
+
+                            async function conteudo(idpost) {
+                                var cont = document.querySelector('.'+idpost)
+                                var requis = await fetch('../post/read.php?idp=' + idpost);
+                                var titulo = await requis.json();
+                                cont.innerHTML = ""
+                                titulo.forEach(function (valor) {
+                                    console.log(valor.titulo);
+                                    cont.innerHTML += "<div>" + valor.texto + "</div>";
+                                })
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
