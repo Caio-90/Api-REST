@@ -10,9 +10,14 @@
 
 	$cat = new Categoria($conexao);
 
-	$resultado = $cat->read(); //todos
+	if (!isset($_GET['id'])){
+		$resultado = $cat->read(); //todos
+
+	}else{
+		$resultado = $cat->read($_GET['id']);
+
+	}
 //	$resultado = $cat->read(); //só um
 
-	$resultado = $cat->read($_GET['id']);
 	
-	print_r($resultado);
+	echo json_encode($resultado);
